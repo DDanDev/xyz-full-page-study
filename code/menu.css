@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;400;800&display=swap");
+
+:root {
+	--accentColor: #5bc241;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Public Sans", sans-serif;
+}
+
+body {
+	background-color: bisque;
+}
+
+.menu {
+	background-color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 50px;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	min-height: 120px;
+}
+
+.menu .thebank {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	min-height: 120px;
+}
+
+.menu #hamburger {
+	display: none;
+}
+
+.menu nav {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.menu nav a {
+	padding: 10px;
+	color: #000;
+	text-decoration: none;
+}
+
+.menu nav .current {
+	color: #fff;
+	background-color: var(--accentColor);
+}
+
+.menu nav .cadastrese {
+	color: #fff;
+	background-color: var(--accentColor);
+	border-radius: 10px;
+	padding: 10px 20px;
+}
+
+main {
+	margin-top: 120px;
+}
+
+@media (max-width: 816px) {
+	.menu {
+		flex-direction: column;
+	}
+
+	.menu nav {
+		padding-bottom: 10px;
+	}
+
+	main {
+		margin-top: 170px;
+	}
+}
+
+@media (max-width: 632px) {
+	.menu nav {
+		flex-direction: column;
+		background-color: #fff;
+		width: 100vw;
+		padding: 0 0 20px 0;
+	}
+
+	.menu #hamburger {
+		display: block;
+		padding-left: 50px;
+		height: 30px;
+	}
+
+	.menu .mobileHidden {
+		display: none;
+	}
+
+	.menu {
+		justify-content: center;
+		/* gap:0; */
+	}
+
+	main {
+		margin-top: 120px;
+	}
+}
