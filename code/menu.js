@@ -5,12 +5,12 @@ menu.innerHTML = `<div class="thebank" id="thebank">
 <img src="./assets/hamburgermenu.png" id="hamburger" />
 </div>
 <nav id="navMenu" class="mobileHidden">
-<a href="./index.html" id="/index.html">Home</a>
-<a href="./sobre.html" id="/sobre.html">Sobre</a>
-<a href="./contato.html" id="/contato.html">Contato</a>
-<a href="./blog.html" id="/blog.html">Blog</a>
-<a href="./carreira.html" id="/carreira.html">Carreira</a>
-<a href="./cadastrese.html" id="/cadastrese.html" class="cadastrese">Cadastre-se</a>
+<a href="./index.html" id="ndex.html">Home</a>
+<a href="./sobre.html" id="obre.html">Sobre</a>
+<a href="./contato.html" id="tato.html">Contato</a>
+<a href="./blog.html" id="blog.html">Blog</a>
+<a href="./carreira.html" id="eira.html">Carreira</a>
+<a href="./cadastrese.html" id="rese.html" class="cadastrese">Cadastre-se</a>
 </nav>
 <link rel="stylesheet" href="./code/menu.css" />
 `;
@@ -18,8 +18,14 @@ menu.innerHTML = `<div class="thebank" id="thebank">
 const hamburger = document.getElementById("thebank");
 const navMenu = document.getElementById("navMenu");
 
-var currentPath = document.location.pathname;
-document.getElementById(currentPath).classList.add("current")
+var currentPath = document.location.pathname.substring(document.location.pathname.length - 9);
+
+try {
+	document.getElementById(currentPath).classList.add("current");
+} catch (e) {
+	document.getElementById("ndex.html").classList.add("current");
+
+}
 
 hamburger.addEventListener("click", function () {
 	if (navMenu.classList.contains("mobileHidden")) {
