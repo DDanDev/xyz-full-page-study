@@ -1,15 +1,31 @@
-# Responsive navigation menu
+# Responsive animated navigation menu
 
-To use, replace page links and titles in menu.js. Add page content html inside \<main>
+Try at https://ddandev.github.io/Navigation-Menu/
+
+To use:
+
+1- Customize page links, titles and logo in `code/menu.html`.
+
+2- Add the script to the end of each html page: `<script src="./code/allPages.js"></script> `
+
+3- All your page's content html must be inside `<main>`
+
+4- Customize your CSS links and other html head tags you might want to add to every page in `code/headAppend.html`
+
+___
+## Hamburger and menu list animations!
+<video src="./readmesrc/demo.mp4" autoplay muted loop controls style="width: 400px; object-fit: cover; height: 400px"></video>
 
 ### Desktop view
-<img src="./readmesrc/desktop.jpg">
+
+<img src="./readmesrc/desktop.jpg" style="width: 70%">
 
 ### Medium size view
-<img src="./readmesrc/medium.jpg" style="width: 50%">
+
+<img src="./readmesrc/medium.jpg" style="width: 40%">
 
 ### Mobile size view
-<img src="./readmesrc/mobile.jpg" style="width: 30%">
 
-<img src="./readmesrc/mobileExpanded.jpg" style="width: 30%">
+<img src="./readmesrc/mobileExpanded.jpg" style="height: 300px;">
+<img src="./readmesrc/mobile.jpg" style="height: 300px;">
 
