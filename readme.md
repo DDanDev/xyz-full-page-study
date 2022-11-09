@@ -14,7 +14,7 @@ To use:
 
 ___
 ## Hamburger and menu list animations!
-<video src="./readmesrc/demo.mp4" autoplay muted loop controls style="width: 400px; object-fit: cover; height: 400px"></video>
+<img src="./readmesrc/demo.gif" style="width: 400px; object-fit: cover; height: 400px">
 
 ### Desktop view
 
