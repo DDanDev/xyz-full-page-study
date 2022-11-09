@@ -1,0 +1,108 @@
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - var(--pageStartOffset) - 10vh);
+	background: url(../assets/images/lemons.jpg) no-repeat center center;
+	background-size: cover;
+	position: relative;
+	padding: 20px;
+}
+
+.hero h2 {
+	letter-spacing: 0.4em;
+	text-shadow: 0 0 0.1em #fff, 0.1em 0.1em 2em #777;
+	transform: scaleY(1.3) translateY(-10px);
+	text-align: center;
+}
+
+.hero p {
+	text-align: center;
+	margin-top: 5px;
+	font-weight: 100;
+}
+
+.hero::after {
+	content: url(../assets/images/seta_preta.png);
+	position: absolute;
+	bottom: 20px;
+	animation: heroArrow 3s infinite linear;
+}
+
+@-webkit-keyframes heroArrow {
+	0% {
+		transform: translateY(0) rotateX(0) rotate(0);
+		opacity: 0.8;
+		filter: drop-shadow(1px 1px 2px #333);
+	}
+	7% {
+		transform: translateY(-10px) rotateX(5deg) rotate(5deg) rotateY(0);
+	}
+	25% {
+		opacity: 0.2;
+	}
+	40% {
+		transform: translateY(-50px) rotateX(300deg) rotate(0) rotateY(90deg) scale(1.15);
+		opacity: 0.6;
+		filter: drop-shadow(8px 45px 15px #777);
+	}
+	45% {
+		transform: translateY(-50px) rotateX(360deg) rotate(0deg) rotateY(100deg) scale(1.15);
+		opacity: 0.6;
+		filter: drop-shadow(8px 50px 15px #777);
+	}
+	70% {
+		transform: translateY(0px) rotateX(360deg) rotate(2deg) rotateY(180deg);
+		filter: drop-shadow(1px 1px 2px #333);
+	}
+	100% {
+		transform: translateY(0px) rotateX(360deg) rotate(0) rotateY(180deg);
+		opacity: 1;
+		filter: drop-shadow(1px 1px 2px #333);
+	}
+}
+
+.alternatingSides > div {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: minmax(60vh, auto);
+	grid-template-areas: "text img";
+	align-items: center;
+	position: relative;
+}
+
+.alternatingSides > div:nth-child(odd) {
+	background-color: #fff;
+}
+
+.alternatingSides > div:nth-child(even) {
+	grid-template-areas: "img text";
+	background-color: hsl(50, 80%, 98%);
+}
+
+.alternatingSides .alternatingImg {
+	grid-area: img;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.alternatingSides .alternatingText {
+	grid-area: text;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 30px 0;
+}
+.alternatingSides .alternatingText > * {
+	padding: 0px 20%;
+}
+.alternatingSides .alternatingText > a {
+	font-weight: 100;
+	/* color: var(--accentColor); */
+}
+
+.alternatingSides .alternatingText > h3 {
+	font-size: 2em;
+}

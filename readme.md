@@ -26,6 +26,5 @@ ___
 
 ### Mobile size view
 
-<img src="./readmesrc/mobileExpanded.jpg" style="height: 300px;">
-<img src="./readmesrc/mobile.jpg" style="height: 300px;">
+<img src="./readmesrc/mobileExpanded.jpg" style="height: 300px;">   <img src="./readmesrc/mobile.jpg" style="height: 300px;">
 
