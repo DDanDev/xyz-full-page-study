@@ -1,4 +1,4 @@
-html {
+:root {
 	--pageStartOffset: 120px;
 }
 
@@ -30,7 +30,7 @@ html {
 	animation: logoHue 4s infinite alternate linear;
 }
 
-@-webkit-keyframes logoHue {
+@keyframes logoHue {
 	0% {
 		filter: hue-rotate(-140deg);
 	}

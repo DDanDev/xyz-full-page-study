@@ -2,13 +2,28 @@
 
 :root {
 	--accentColor: #5bc241;
+	--offWhiteColor: #eee;
+	--babyBlueColor: hsl(200, 65%, 70%);
+	--babyPinkColor: hsl(350, 85%, 80%);
+	--babyGreenColor: hsl(108, 51%, 70%);
+	--babyPurpleColor: hsl(230, 70%, 70%);
+	--sideBySideMaxRows: 2;
 }
+
+.max4Rows {
+	--sideBySideMaxRows: 4;
+}
+
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	font-family: "Public Sans", sans-serif;
+}
+
+body * {
+	overflow: hidden;
 }
 
 body {
@@ -20,8 +35,14 @@ a {
 	text-decoration: none;
 }
 
-img {
+img.cropToFit {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+}
+
+img.shrinkToFit {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
