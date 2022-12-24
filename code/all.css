@@ -2,11 +2,12 @@
 
 :root {
 	--accentColor: #5bc241;
-	--offWhiteColor: #eee;
+	--offWhiteColor: hsl(0, 0%, 97%);
 	--babyBlueColor: hsl(200, 65%, 70%);
 	--babyPinkColor: hsl(350, 85%, 80%);
 	--babyGreenColor: hsl(108, 51%, 70%);
 	--babyPurpleColor: hsl(230, 70%, 70%);
+
 	--sideBySideMaxRows: 2;
 }
 
@@ -14,20 +15,35 @@
 	--sideBySideMaxRows: 4;
 }
 
+/* @media (max-width: calc(((380px - 40px * 4) * 4) + 30px)) {
+	.max4Rows {
+		--sideBySideMaxRows: 2;
+	}
+} */
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	font-family: "Public Sans", sans-serif;
+	list-style-type: none;
 }
 
 body * {
 	overflow: hidden;
 }
-
 body {
-	background-color: bisque;
+	background-color: #fff;
+
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	/* align-items: center; */
+}
+
+body > * {
+	/* max-width: 1920px; */
+	align-self: center;
 }
 
 a {
@@ -35,6 +51,7 @@ a {
 	text-decoration: none;
 }
 
+/* handle images. <img> must always be inside a block with a defined width and height to not behave weird and scale properly to intended size and position! */
 img.cropToFit {
 	height: 100%;
 	width: 100%;

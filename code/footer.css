@@ -1,0 +1,26 @@
+footer {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	align-items: center;
+	background-color: var(--babyGreenColor);
+	width: 100%;
+	padding: 30px 30px;
+}
+
+footer ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+footer ul li {
+	height: 1em;
+}
+
+footer a {
+    display: block;
+    height: 100%;
+}

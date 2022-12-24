@@ -1,3 +1,4 @@
+/* Full page (almost) banner with text, sub text and arrow */
 .hero {
 	display: flex;
 	flex-direction: column;
@@ -24,6 +25,7 @@
 	font-weight: 100;
 }
 
+/* down arrow to indicate scroll. Optional animation */
 .hero::after {
 	content: url(../assets/images/seta_preta.png);
 	position: absolute;
@@ -64,6 +66,13 @@
 	}
 }
 
+/* ----------------
+Section layouts
+---------------- */
+
+/* full width content with alternating sides of text and image. 
+Default height is a bit more (1.2x) half the available screen 
+gets taller if needed to fit text*/
 .alternatingSides > div {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -73,16 +82,56 @@
 	position: relative;
 }
 
+.alternatingSides .alternatingImg {
+	grid-area: img;
+	width: 100%;
+	height: 100%;
+	/* abosulte so the image is ignored for defining the section height */
+	position: absolute;
+	/* z so the image doesn't get filtered by alternating sides filters */
+	z-index: 2;
+}
+
+.alternatingSides .alternatingText {
+	grid-area: text;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 30px 0;
+}
+
+.alternatingSides .alternatingText > * {
+	padding: 0px 20%;
+}
+
+.alternatingSides > div:nth-child(odd) .alternatingText {
+	text-align: right;
+}
+
+.alternatingSides .alternatingText a {
+	font-weight: 100;
+	/* color: var(--accentColor); */
+}
+
+.alternatingSides .alternatingText > h3 {
+	font-size: 2em;
+}
+
+/* background for content subsctions. Evens are set below for optionally alternating styles */
 .alternatingSides > div:nth-child(odd) {
 	background-color: var(--offWhiteColor);
 }
 
+/* invert evens. 
+Also, relative to use absolute in after (filter on top of all section) and before (background color and filter for bg)
+These alternating styles are better when not using the rounded border images */
 .alternatingSides > div:nth-child(even) {
 	grid-template-areas: "img text";
 	position: relative;
 	/* filter: invert(); */
 }
 
+/* Can invert the whole section (bg and invert text to keep contrast) */
 .alternatingSides > div:nth-child(even)::after {
 	content: "";
 	position: absolute;
@@ -93,6 +142,7 @@
 	z-index: 1;
 }
 
+/* Can use the same base color BG as odds with a slight difference */
 .alternatingSides > div:nth-child(even)::before {
 	content: "";
 	position: absolute;
@@ -103,12 +153,12 @@
 	z-index: -1;
 }
 
-/* .alternatingSides .alternatingImg img {
-	border-radius: 50% 0 50% 0;
-} */
-
+/* Customizable alternating rounded borders for images 
+Use 1 and 0 to enable or disable each border. Order is same as css, top-left then clockwise*/
 .alternatingSides {
+	/* px is default border size, %is a limit for low view width */
 	--imgBorders: min(70%, 200px);
+	/* optional force rounding of first and last contents */
 	--bEnds: 1;
 
 	--bOdd1: 0;
@@ -130,68 +180,58 @@
 	border-radius: calc(var(--imgBorders) * var(--bEven1)) calc(var(--imgBorders) * var(--bEven2)) calc(var(--imgBorders) * var(--bEven3)) calc(var(--imgBorders) * var(--bEven4));
 }
 
+/* no rounding on first content at edges of section 
+optional no rounding or force rounding*/
 .alternatingSides > div:nth-child(1) .alternatingImg img {
 	border-top-right-radius: 0;
 	border-top-left-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: calc(var(--imgBorders) * var(--bEnds));
+	/* border-bottom-right-radius: 0; */
+	/* border-bottom-left-radius: calc(var(--imgBorders) * var(--bEnds)); */
 }
 
+/* no rounding on last element, at edges of section */
 .alternatingSides > div:nth-last-child(1):nth-child(odd) .alternatingImg img {
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-top-left-radius: calc(var(--imgBorders) * var(--bEnds));
+	/* border-top-right-radius: 0; */
+	/* border-top-left-radius: calc(var(--imgBorders) * var(--bEnds)); */
 }
 
 .alternatingSides > div:nth-last-child(1):nth-child(even) .alternatingImg img {
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
-	border-top-left-radius: 0;
-	border-top-right-radius: calc(var(--imgBorders) * var(--bEnds));
+	/* border-top-left-radius: 0; */
+	/* border-top-right-radius: calc(var(--imgBorders) * var(--bEnds)); */
 }
 
-.alternatingSides .alternatingImg {
-	grid-area: img;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	z-index: 2;
-}
-
-.alternatingSides .alternatingText {
-	grid-area: text;
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
-	padding: 30px 0;
-}
-
-.alternatingSides .alternatingText > * {
-	padding: 0px 20%;
-}
-
-.alternatingSides .alternatingText a {
-	font-weight: 100;
-	/* color: var(--accentColor); */
-}
-
-.alternatingSides .alternatingText > h3 {
-	font-size: 2em;
-}
-
+/* Section for contents organized by columns, breaks into less columns when needed to screen size */
 .sidebyside {
-	/* display: grid;
-	grid-template-columns: 1fr 1fr; */
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .sidebyside > div {
-	min-width: min(max(calc((100% / var(--sideBySideMaxRows)) - 1%), calc(600px / var(--sideBySideMaxRows))), 100%);
+	/* default maxrows is 2, for content with a lot of text
+	class max4Rows for smaller blocks
+	width increases to fit full width
+	minimum width is never bigger than 100% available screen so no horizontal scrolling
+	min width by default is full width divided by max rows, breaks at different minimum widths for different maxrow settings
+	-1% because page's scrollbar */
+	min-width: min(max(calc((100% / var(--sideBySideMaxRows)) - 1%), calc(440px - 70px * var(--sideBySideMaxRows))), 100%);
 	flex: 1;
 }
 
+/* At dynamic breakpoint (same as above), change default width to twice so it doesn't break the last element alone
++30px to avoid weirdness because of browser's page scrollbar
+if max4rows value is changed, change the * 4 on media query too */
+@media (max-width: calc(((440px - 70px * 4) * 4) + 30px)) {
+	.sidebyside.max4Rows > div {
+		min-width: min(max(calc((100% / (var(--sideBySideMaxRows) / 2)) - 1%), calc(440px - 70px * var(--sideBySideMaxRows))), 100%);
+	}
+}
+
+/* each content has a different BG
+all color variables are in all.css */
 .sidebyside > div:nth-child(4n-3) {
 	background-color: var(--babyBlueColor);
 }
@@ -205,6 +245,11 @@
 	background-color: var(--babyPurpleColor);
 }
 
+/* ===============
+content types to go inside section layouts
+================= */
+
+/* Content made of column of centered text and/or image */
 .centeredContent {
 	display: flex;
 	flex-direction: column;
@@ -214,36 +259,45 @@
 	text-align: center;
 }
 
+/* text or image are full width excluding a decent area proportional to final width 
+height of the content box is the sum of what's needed for text and image inside*/
 .centeredContent > * {
 	padding: 0 20%;
 	width: 100%;
 }
 
+/* for inline images, set height and allow shrinktofit or croptofit to do their thing */
 .centeredContent .imageDiv {
 	height: 200px;
 }
 
+/* Content made of full image blocks, let it scale but not more than % of screen height */
 .fullImgBlocks .imageDiv {
 	max-height: 40vh;
 }
 
-.sectionTitle {
-	width: 100vw;
-	text-align: center;
-	padding: 30px 10%;
-	color: var(--offWhiteColor);
-	background-color: var(--accentColor);
-	letter-spacing: 2px;
-}
+/* image features for content blocks */
 
+/* they are centered, don't overflow and can have links <a> */
+.imageDiv > a,
 .imageDiv {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	overflow: hidden;
 }
 
-.imageDiv > .imageTitle::before {
+/* fix for correct sizing of a when it wraps the entire img and img title */
+.imageDiv > a.linkedImg {
+	width: 100%;
+	height: 100%;
+}
+
+/* features for text over image: */
+
+/*  disabled: can add a background with filters like blur to the text for readability */
+.imageDiv .imageTitle::before {
 	/* content: ""; */
 	position: absolute;
 	background-color: #fff;
@@ -255,8 +309,10 @@
 	/* filter: blur(40px); */
 }
 
-.imageDiv > .imageTitle {
-	overflow: visible;
+/* To reposition the text inside the image use top, bottom, etc
+Also adds dropshadow or background filter (blur the image behind) for readability
+Also adds properties for hover when the title is a link */
+.imageDiv .imageTitle {
 	position: absolute;
 	text-align: center;
 	margin: 15%;
@@ -264,7 +320,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-	z-index: 0;
+	/* top: 0; */
+	z-index: 1;
 	/* background-color: rgba(255, 255, 255, 0.3); */
 	text-shadow: var(--dropShadowColor) 0px 0px 2px;
 	--dropShadowSize: 5px;
@@ -272,17 +329,29 @@
 	filter: drop-shadow(var(--dropShadowColor) calc(-1 * var(--dropShadowSize)) 0px var(--dropShadowSize)) drop-shadow(var(--dropShadowColor) 0px calc(-1 * var(--dropShadowSize)) var(--dropShadowSize)) drop-shadow(var(--dropShadowColor) var(--dropShadowSize) 0px var(--dropShadowSize)) drop-shadow(var(--dropShadowColor) 0px var(--dropShadowSize) var(--dropShadowSize));
 	/* backdrop-filter: blur(2px); */
 	border-radius: 25px;
+	transition: 0.2s;
 }
 
-.imageDiv > .imageTitle > * {
+.imageDiv .imageTitle,
+.imageDiv .imageTitle * {
 	font-weight: 400;
 }
 
-.imageDiv:hover a,
-.imageDiv:hover a * {
+.imageDiv:hover a.imageTitle,
+.imageDiv:hover a .imageTitle {
 	/* color: var(--accentColor); */
 	/* font-weight: 900; */
 	--dropShadowColor: rgba(255, 255, 255, 0.2);
 	/* --dropShadowColor: none; */
 	background-color: var(--babyGreenColor);
+}
+
+/* full width bar for a section's header or footer */
+.sectionTitle {
+	width: 100%;
+	text-align: center;
+	padding: 30px 10%;
+	color: var(--offWhiteColor);
+	background-color: var(--accentColor);
+	letter-spacing: 2px;
 }

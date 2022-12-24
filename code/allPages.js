@@ -1,4 +1,4 @@
-//add styles to head
+//add styles or other stuff to head
 var headAppend = new XMLHttpRequest();
 headAppend.open("GET", "./code/headAppend.html");
 headAppend.onreadystatechange = () => {
@@ -40,3 +40,12 @@ createMenu.onreadystatechange = () => {
 	});
 };
 createMenu.send();
+
+// add footer to page, last thing in body, after main
+var createFooter = new XMLHttpRequest();
+createFooter.open("GET", "./code/footer.html");
+createFooter.onreadystatechange = () => {
+	if (createFooter.readyState !== 4) return;
+	document.body.insertAdjacentHTML("beforeend", createFooter.responseText);
+};
+createFooter.send();
